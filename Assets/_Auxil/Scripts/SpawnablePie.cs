@@ -66,6 +66,7 @@ public class SpawnablePie : MonoBehaviour
         selectedImg = satisfLvlImgs[levelIndex];
         selectedImg.color = Color.white;
         selectedImg.transform.localScale = Vector3.one * 1.1f;
+        mainCanvas.SetInteger("madness_level", levelIndex);
     }
 
     private void Update()
