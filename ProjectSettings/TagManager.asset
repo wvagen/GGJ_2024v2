@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - player
+  - FxTemporaire
+  - head
   layers:
   - Default
   - TransparentFX

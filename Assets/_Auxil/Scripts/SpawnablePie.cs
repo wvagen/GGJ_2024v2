@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class SpawnablePie : MonoBehaviour
 {
@@ -17,8 +18,14 @@ public class SpawnablePie : MonoBehaviour
     [SerializeField]
     private GameObject _RealWorldCanvas;
 
+    [SerializeField]
+    private TextMeshProUGUI scoreTxt;
+
     float nextSpawnTime = 0;
     float targetRate = 3;
+
+    int score = 0;
+    short multiplier = 1;
 
     private void Start()
     {
@@ -49,8 +56,14 @@ public class SpawnablePie : MonoBehaviour
             //pieSrciptPos.x = spawnablePieUI.transform.position.x;
             pieScript.transform.position = spawnablePieUI.transform.position;
             pieScript.transform.position += transform.forward * 5;
-            pieScript.SetMe(forceSpeed);
+            pieScript.SetMe(this,forceSpeed);
 
             Destroy(spawnablePieUI.gameObject, collapseSpeed);
+    }
+
+    public void IncScore()
+    {
+        score += 100 * multiplier;
+        scoreTxt.text = score.ToString();
     }
 }

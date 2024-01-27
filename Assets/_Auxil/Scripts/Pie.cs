@@ -10,14 +10,14 @@ public class Pie : MonoBehaviour
     [SerializeField]
     private GameObject piGO,pieDestruction;
 
-    private void Start()
-    {
-        Debug.Log("Pie: " + transform.position);
-    }
+    private SpawnablePie _man;
 
-    public void SetMe(float speed)
+    bool isCollided = false;
+
+    public void SetMe(SpawnablePie _man, float speed)
     {
         myRig.velocity = transform.forward * speed;
+        this._man = _man;
     }
 
     void DisableColliders()
@@ -30,9 +30,30 @@ public class Pie : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (isCollided) return;
+
+        SelfDestruction();
+    }
+
+    void SelfDestruction()
+    {
+        isCollided = true;
         piGO.SetActive(false);
         pieDestruction.SetActive(true);
         StartCoroutine(DisableAfterWhile());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (isCollided) return;
+
+        if (other.gameObject.tag == "head")
+        {
+            //Score ++;
+            _man.IncScore();
+        }
+
+        SelfDestruction();
     }
 
     IEnumerator DisableAfterWhile()
