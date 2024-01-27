@@ -8,7 +8,7 @@ public class Pie : MonoBehaviour
     private Rigidbody myRig;
 
     [SerializeField]
-    private GameObject piGO,pieDestruction;
+    private GameObject piGO,pieDestruction,pieParticle;
 
     private SpawnablePie _man;
 
@@ -41,6 +41,7 @@ public class Pie : MonoBehaviour
         piGO.SetActive(false);
         pieDestruction.SetActive(true);
         StartCoroutine(DisableAfterWhile());
+        Destroy(Instantiate(pieParticle, transform.position, Quaternion.identity), 1.5f);
     }
 
     private void OnTriggerEnter(Collider other)
