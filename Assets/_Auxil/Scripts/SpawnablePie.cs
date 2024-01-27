@@ -66,6 +66,7 @@ public class SpawnablePie : MonoBehaviour
         selectedImg = satisfLvlImgs[levelIndex];
         selectedImg.color = Color.white;
         selectedImg.transform.localScale = Vector3.one * 1.1f;
+
         mainCanvas.SetInteger("madness_level", levelIndex);
     }
 
@@ -88,13 +89,13 @@ public class SpawnablePie : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             currentKingMood--;
-            Lose(30);
+            SelectLevel(currentKingMood);
 
         }
         if (Input.GetKeyDown(KeyCode.H))
         {
             currentKingMood++;
-            Lose(-30);
+            SelectLevel(currentKingMood);
         }
     }
 
@@ -107,8 +108,6 @@ public class SpawnablePie : MonoBehaviour
 
             yield return new WaitForSeconds(1);
             Pie pieScript = Instantiate(_Pie).GetComponent<Pie>();
-            Vector3 pieSrciptPos = pieScript.transform.position;
-            //pieSrciptPos.x = spawnablePieUI.transform.position.x;
             pieScript.transform.position = spawnablePieUI.transform.position;
             pieScript.transform.position += transform.forward * 5;
             pieScript.SetMe(this,forceSpeed);
@@ -121,11 +120,26 @@ public class SpawnablePie : MonoBehaviour
         score += 100 * multiplier;
         scoreTxt.text = score.ToString();
         mainCanvas.Play("inGameCanvas_Laugher");
+        if (currentKingMood < 2)
+        {
+            currentKingMood++;
+            StartCoroutine(RotateTowards(-30));
+            SelectLevel(currentKingMood);
+        }
     }
 
-    public void Lose(float angle)
+    public void DecScore()
     {
-        StartCoroutine(RotateTowards(angle));
+        if (currentKingMood > 0)
+        {
+            currentKingMood--;
+            StartCoroutine(RotateTowards(30));
+            SelectLevel(currentKingMood);
+        }
+        else
+        {
+            Game_Over();
+        }
     }
 
     IEnumerator RotateTowards(float angle)
@@ -141,7 +155,6 @@ public class SpawnablePie : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         currentNeedleRot = targetPos;
-        SelectLevel(currentKingMood);
     }
 
     public void Game_Over()
