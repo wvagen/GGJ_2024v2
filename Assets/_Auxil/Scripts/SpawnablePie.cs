@@ -40,7 +40,7 @@ public class SpawnablePie : MonoBehaviour
     {
             SpawnablePieUI spawnablePieUI;
             spawnablePieUI = Instantiate(_PieUI, _RealWorldCanvas.transform).GetComponent<SpawnablePieUI>();
-            spawnablePieUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(Random.Range(-650f, 650f), 0, 0);
+            spawnablePieUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(Random.Range(-650f, 650f), Random.Range(-150f, 150f), 0);
             spawnablePieUI.SetMe(collapseSpeed);
 
             yield return new WaitForSeconds(1);

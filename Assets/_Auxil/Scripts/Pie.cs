@@ -20,9 +20,25 @@ public class Pie : MonoBehaviour
         myRig.velocity = transform.forward * speed;
     }
 
+    void DisableColliders()
+    {
+        foreach (Collider col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         piGO.SetActive(false);
         pieDestruction.SetActive(true);
+        StartCoroutine(DisableAfterWhile());
+    }
+
+    IEnumerator DisableAfterWhile()
+    {
+        yield return new WaitForSeconds(.5f);
+        DisableColliders();
+        Destroy(gameObject, 2);
     }
 }
