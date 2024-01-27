@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform Hip;
 
-    //[SerializeField]
-    //private Camera mainCam;
+    [SerializeField]
+    private Camera mainCam;
 
     // Start is called before the first frame update
     void Start()
@@ -50,13 +50,15 @@ public class Player : MonoBehaviour
 
     void LookTowards()
     {
-        //Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePosition = Input.mousePosition;
 
-        //// Convert the mouse position to a point in the game world
-        //Vector3 worldMousePosition = mainCam.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10f));
+        // Convert the mouse position to a point in the game world
+        Vector3 worldMousePosition = mainCam.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10f));
 
         //// Make the object look towards the mouse position
-        //Hip.LookAt(worldMousePosition,Vector3.right);
+        //Hip.LookAt(worldMousePosition, Vector3.right);
+
+        Debug.Log((worldMousePosition - Hip.transform.position).normalized);
 
         float moveY = -Input.GetAxis("Vertical");
         Hip.Rotate(Vector3.up * Time.deltaTime * rotSpeed * moveY);
