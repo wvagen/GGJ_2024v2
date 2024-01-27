@@ -30,7 +30,7 @@ public class Pie : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isCollided) return;
+        if (isCollided || SpawnablePie.isGameOver) return;
 
         SelfDestruction();
     }
@@ -46,7 +46,7 @@ public class Pie : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isCollided) return;
+        if (isCollided || SpawnablePie.isGameOver) return;
 
         if (other.gameObject.tag == "head")
         {
