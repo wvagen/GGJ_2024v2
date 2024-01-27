@@ -17,16 +17,27 @@ public class SpawnablePie : MonoBehaviour
     [SerializeField]
     private GameObject _RealWorldCanvas;
 
-    // Start is called before the first frame update
-    void Start()
+    float nextSpawnTime = 0;
+    float targetRate = 3;
+
+    private void Start()
     {
-        StartCoroutine(SpawnPies());
+        nextSpawnTime = targetRate;
+    }
+
+    private void Update()
+    {
+        nextSpawnTime += Time.deltaTime;
+
+        if (nextSpawnTime >= targetRate)
+        {
+            nextSpawnTime = 0;
+            StartCoroutine(SpawnPies());
+        }
     }
 
     IEnumerator SpawnPies()
     {
-        while (true)
-        {
             SpawnablePieUI spawnablePieUI;
             spawnablePieUI = Instantiate(_PieUI, _RealWorldCanvas.transform).GetComponent<SpawnablePieUI>();
             spawnablePieUI.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(Random.Range(-650f, 650f), 0, 0);
@@ -40,10 +51,6 @@ public class SpawnablePie : MonoBehaviour
             pieScript.transform.position += transform.forward * 5;
             pieScript.SetMe(forceSpeed);
 
-            Destroy(spawnablePieUI.gameObject);
-
-            yield return new WaitForEndOfFrame();
-        }
-
+            Destroy(spawnablePieUI.gameObject, collapseSpeed);
     }
 }
