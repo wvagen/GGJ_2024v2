@@ -47,9 +47,15 @@ MonoBehaviour:
   _sounds:
   - name: Music
     clip: {fileID: 8300000, guid: 0b6cac1f78709f84e9184c13e3b53a82, type: 3}
-    volume: 1
-    pitch: 0.918
+    volume: 0.7
+    pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: PieOrDie
+    clip: {fileID: 8300000, guid: a2056facf0b8eee4bb873f551d08c21f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
     source: {fileID: 0}
   externalAudioSource: {fileID: 0}
   musicMoment: 0

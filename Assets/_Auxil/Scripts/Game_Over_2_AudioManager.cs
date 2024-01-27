@@ -20,25 +20,6 @@ public class Game_Over_2_AudioManager : MonoBehaviour
         if (audioManInstance == null)
         {
             audioManInstance = this;
-            sceneName = SceneManager.GetActiveScene().name;
-        }
-        else if (audioManInstance.sceneName != SceneManager.GetActiveScene().name)
-        {
-            if (Get_Music_Clip() == audioManInstance.Get_Music_Clip())
-                musicMoment = audioManInstance.musicMoment;
-            else
-                musicMoment = 0;
-
-            Destroy(audioManInstance.gameObject);
-
-            audioManInstance = this;
-            sceneName = SceneManager.GetActiveScene().name;
-
-            //return;
-        }
-        else
-        {
-            return;
         }
 
         DontDestroyOnLoad(gameObject);
@@ -56,6 +37,13 @@ public class Game_Over_2_AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
 
+        Play_Sfx("PieOrDie");
+        StartCoroutine(StartMusicAfterWhile());
+    }
+
+    IEnumerator StartMusicAfterWhile()
+    {
+        yield return new WaitForSeconds(.7f);
         Play_Music("Music");
     }
 
