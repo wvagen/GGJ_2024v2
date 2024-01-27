@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class SpawnablePie : MonoBehaviour
@@ -27,6 +28,20 @@ public class SpawnablePie : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI finalScoreTxt, finalBestSCoreTxt;
 
+    [SerializeField]
+    private Transform satisfNeedle;
+
+    [SerializeField]
+    private Color diselectedSatisfactionCol;
+
+    [SerializeField]
+    private Image[] satisfLvlImgs;
+
+    Image selectedImg;
+
+    Vector3 currentNeedleRot = Vector3.zero;
+    int currentKingMood = 1;
+
     float nextSpawnTime = 0;
     float targetRate = 3;
 
@@ -38,6 +53,19 @@ public class SpawnablePie : MonoBehaviour
     {
         nextSpawnTime = targetRate;
         isGameOver = false;
+        SelectLevel(1);
+    }
+
+    void SelectLevel(int levelIndex)
+    {
+        if (selectedImg != null)
+        {
+            selectedImg.color = diselectedSatisfactionCol;
+            selectedImg.transform.localScale = Vector3.one;
+        }
+        selectedImg = satisfLvlImgs[levelIndex];
+        selectedImg.color = Color.white;
+        selectedImg.transform.localScale = Vector3.one * 1.1f;
     }
 
     private void Update()
@@ -50,9 +78,22 @@ public class SpawnablePie : MonoBehaviour
             StartCoroutine(SpawnPies());
         }
 
+        //For testing
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Game_Over();
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            currentKingMood--;
+            Lose(30);
+
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            currentKingMood++;
+            Lose(-30);
         }
     }
 
@@ -79,6 +120,27 @@ public class SpawnablePie : MonoBehaviour
         score += 100 * multiplier;
         scoreTxt.text = score.ToString();
         mainCanvas.Play("inGameCanvas_Laugher");
+    }
+
+    public void Lose(float angle)
+    {
+        StartCoroutine(RotateTowards(angle));
+    }
+
+    IEnumerator RotateTowards(float angle)
+    {
+        Vector3 targetPos = currentNeedleRot;
+
+        targetPos.z = currentNeedleRot.z + angle;
+
+        while(Mathf.Abs(targetPos.z - currentNeedleRot.z) > 0.05f)
+        {
+            currentNeedleRot = Vector3.MoveTowards(currentNeedleRot, targetPos, Time.deltaTime * 100);
+            satisfNeedle.eulerAngles = currentNeedleRot;
+            yield return new WaitForEndOfFrame();
+        }
+        currentNeedleRot = targetPos;
+        SelectLevel(currentKingMood);
     }
 
     public void Game_Over()

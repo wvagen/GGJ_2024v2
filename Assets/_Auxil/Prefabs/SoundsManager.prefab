@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sounds:
   - name: Music
-    clip: {fileID: 8300000, guid: 33a7142f6ddc94d058f70a85e10ed202, type: 3}
+    clip: {fileID: 8300000, guid: 0b6cac1f78709f84e9184c13e3b53a82, type: 3}
     volume: 1
-    pitch: 0.9
+    pitch: 0.918
     loop: 1
     source: {fileID: 0}
   externalAudioSource: {fileID: 0}
