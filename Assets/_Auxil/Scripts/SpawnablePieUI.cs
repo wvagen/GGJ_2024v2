@@ -16,6 +16,11 @@ public class SpawnablePieUI : MonoBehaviour
 
     float closeSpeed;
 
+    private void Start()
+    {
+        Debug.Log("Spawnable UI: " + transform.position);
+    }
+
     public void SetMe(float closeSpeed)
     {
         this.closeSpeed = closeSpeed;

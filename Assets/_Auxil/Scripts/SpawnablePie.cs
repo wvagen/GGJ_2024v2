@@ -35,8 +35,9 @@ public class SpawnablePie : MonoBehaviour
             yield return new WaitForSeconds(1);
             Pie pieScript = Instantiate(_Pie).GetComponent<Pie>();
             Vector3 pieSrciptPos = pieScript.transform.position;
-            pieSrciptPos.x = spawnablePieUI.transform.position.x;
-            pieScript.transform.position = pieSrciptPos;
+            //pieSrciptPos.x = spawnablePieUI.transform.position.x;
+            pieScript.transform.position = spawnablePieUI.transform.position;
+            pieScript.transform.position += transform.forward * 5;
             pieScript.SetMe(forceSpeed);
 
             Destroy(spawnablePieUI.gameObject);

@@ -7,6 +7,14 @@ public class Pie : MonoBehaviour
     [SerializeField]
     private Rigidbody myRig;
 
+    [SerializeField]
+    private GameObject piGO,pieDestruction;
+
+    private void Start()
+    {
+        Debug.Log("Pie: " + transform.position);
+    }
+
     public void SetMe(float speed)
     {
         myRig.velocity = transform.forward * speed;
@@ -14,9 +22,7 @@ public class Pie : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
+        piGO.SetActive(false);
+        pieDestruction.SetActive(true);
     }
 }
