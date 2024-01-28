@@ -72,7 +72,6 @@ public class Pie : MonoBehaviour
     void SelfDestruction()
     {
         isCollided = true;
-        DisableColliders();
         piGO.SetActive(false);
         pieDestruction.SetActive(true);
         StartCoroutine(DisableAfterWhile());
@@ -103,7 +102,8 @@ public class Pie : MonoBehaviour
 
     IEnumerator DisableAfterWhile()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
+        DisableColliders();
         Destroy(gameObject, 2);
     }
 }
