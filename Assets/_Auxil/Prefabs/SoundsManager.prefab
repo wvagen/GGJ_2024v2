@@ -88,7 +88,13 @@ MonoBehaviour:
     loop: 1
     source: {fileID: 0}
   - name: king_laugh
-    clip: {fileID: 8300000, guid: 9e3a7ea1e6c38134b821774302a3ab5f, type: 3}
+    clip: {fileID: 8300000, guid: 85af9efcd4c5dbe458f7143c0d365290, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: motivation_3
+    clip: {fileID: 8300000, guid: fa6476577186ae04a84af0a46c28cba6, type: 3}
     volume: 1
     pitch: 1
     loop: 0

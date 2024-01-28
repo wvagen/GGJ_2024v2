@@ -163,7 +163,7 @@ public class SpawnablePie : MonoBehaviour
             StartCoroutine(RotateTowards(-30));
             SelectLevel(currentKingMood);
 
-            if (currentKingMood == 2)
+            if (currentKingMood == 2 && (Random.Range(0,2) % 2 == 0))
             {
                 Game_Over_2_AudioManager.audioManInstance.Play_Sfx("king_laugh");
             }
@@ -203,6 +203,11 @@ public class SpawnablePie : MonoBehaviour
         else
         {
             Game_Over();
+        }
+
+        if (currentKingMood == 0)
+        {
+            Play_Motivational_Word(3);
         }
     }
 
