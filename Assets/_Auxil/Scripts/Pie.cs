@@ -12,6 +12,11 @@ public class Pie : MonoBehaviour
 
     private SpawnablePie _man;
 
+    [SerializeField]
+    private Collider[] cols;
+    [SerializeField]
+    private BoxCollider[] boxcols;
+
     bool isCollided = false;
 
     //void FixedUpdate()
@@ -45,9 +50,14 @@ public class Pie : MonoBehaviour
 
     void DisableColliders()
     {
-        foreach (Collider col in GetComponentsInChildren<Collider>())
+        foreach (var item in cols)
         {
-            col.enabled = false;
+            item.enabled = false;
+        }
+
+        foreach (var item in boxcols)
+        {
+            item.enabled = false;
         }
     }
 
@@ -62,9 +72,11 @@ public class Pie : MonoBehaviour
     void SelfDestruction()
     {
         isCollided = true;
+        DisableColliders();
         piGO.SetActive(false);
         pieDestruction.SetActive(true);
         StartCoroutine(DisableAfterWhile());
+        Game_Over_2_AudioManager.audioManInstance.Play_Sfx("Splat");
         Destroy(Instantiate(pieParticle, transform.position, Quaternion.identity), 1.5f);
     }
 
@@ -92,7 +104,6 @@ public class Pie : MonoBehaviour
     IEnumerator DisableAfterWhile()
     {
         yield return new WaitForSeconds(.5f);
-        DisableColliders();
         Destroy(gameObject, 2);
     }
 }

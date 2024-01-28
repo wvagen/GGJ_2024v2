@@ -30,12 +30,18 @@ public class UIMan : MonoBehaviour
     {
         camAnim.Play("CamAnim");
         mainCanvasAnimator.Play("MainReverse");
-        myAnim.Play("LoadingAnim");
         StartCoroutine(LoadSceneCoroutine("LabScene"));
+    }
+
+    public void LoadScene(string sceneName)
+    {
+        StartCoroutine(LoadSceneCoroutine(sceneName));
     }
 
     IEnumerator LoadSceneCoroutine(string sceneName_Path)
     {
+        myAnim.Play("LoadingAnim");
+
         yield return new WaitForSeconds(0.5f);
 
         //Begin to load the Scene you specify

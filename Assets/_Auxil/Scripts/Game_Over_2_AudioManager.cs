@@ -20,10 +20,15 @@ public class Game_Over_2_AudioManager : MonoBehaviour
         if (audioManInstance == null)
         {
             audioManInstance = this;
+            Init();
+        }
+        else
+        {
+            Destroy(this.gameObject);
         }
 
         DontDestroyOnLoad(gameObject);
-        Init();
+
     }
 
     void Init()

@@ -15,6 +15,7 @@ public class SpawnablePie : MonoBehaviour
 
     public float forceSpeed;
     public float collapseSpeed;
+    public float targetRate = 3;
 
     [SerializeField]
     private GameObject _PieUI;
@@ -43,7 +44,6 @@ public class SpawnablePie : MonoBehaviour
     int currentKingMood = 1;
 
     float nextSpawnTime = 0;
-    float targetRate = 3;
 
     int score = 0;
     short multiplier = 1;
@@ -86,17 +86,17 @@ public class SpawnablePie : MonoBehaviour
             Game_Over();
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            currentKingMood--;
-            SelectLevel(currentKingMood);
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    currentKingMood--;
+        //    SelectLevel(currentKingMood);
 
-        }
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            currentKingMood++;
-            SelectLevel(currentKingMood);
-        }
+        //}
+        //if (Input.GetKeyDown(KeyCode.H))
+        //{
+        //    currentKingMood++;
+        //    SelectLevel(currentKingMood);
+        //}
     }
 
     IEnumerator SpawnPies()

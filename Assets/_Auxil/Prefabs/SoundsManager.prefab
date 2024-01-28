@@ -57,5 +57,11 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Splat
+    clip: {fileID: 8300000, guid: 4d0ccc1157d62474badd5ec7dbd5fb93, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   externalAudioSource: {fileID: 0}
   musicMoment: 0
