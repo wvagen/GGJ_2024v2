@@ -63,5 +63,23 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: motivation_0
+    clip: {fileID: 8300000, guid: 38baff9600d2c0545ac60db0ce67c840, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: motivation_1
+    clip: {fileID: 8300000, guid: f2d6428266096b344afa7e6ad7a0de79, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: motivation_2
+    clip: {fileID: 8300000, guid: a2056facf0b8eee4bb873f551d08c21f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   externalAudioSource: {fileID: 0}
   musicMoment: 0

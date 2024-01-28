@@ -116,6 +116,31 @@ public class Game_Over_2_AudioManager : MonoBehaviour
         s.source.Play();
     }
 
+    public void ChangeMusicPitch()
+    {
+        foreach (Game_Over_2_Sound s in _sounds)
+        {
+            if (s.name == "Music")
+            {
+                s.source.pitch = 0.8f;
+                break;
+            }
+        }
+    }
+
+    public void InitMusicPitch()
+    {
+        foreach (Game_Over_2_Sound s in _sounds)
+        {
+            if (s.name == "Music")
+            {
+                s.source.pitch = 1;
+                break;
+            }
+        }
+    }
+
+
     public void Mute_Music(bool m)
     {
         foreach (Game_Over_2_Sound s in _sounds)

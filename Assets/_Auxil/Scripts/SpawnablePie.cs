@@ -43,6 +43,14 @@ public class SpawnablePie : MonoBehaviour
     [SerializeField]
     private GameObject tutoPanel;
 
+    [SerializeField]
+    private Sprite[] _motivationalSprites;
+    [SerializeField]
+    private Image _motivationalImg;
+
+    [SerializeField]
+    private TextMeshProUGUI _scoreIncTxt;
+
     Image selectedImg;
 
     Vector3 currentNeedleRot = Vector3.zero;
@@ -144,16 +152,42 @@ public class SpawnablePie : MonoBehaviour
         score += 100 * multiplier;
         scoreTxt.text = score.ToString();
         mainCanvas.Play("inGameCanvas_Laugher");
+
+        _scoreIncTxt.text = "+" + (100 * multiplier);
+        mainCanvas.Play("inGameCanvas_ScoreIncreaser");
+
         if (currentKingMood < 2)
         {
             currentKingMood++;
             StartCoroutine(RotateTowards(-30));
             SelectLevel(currentKingMood);
         }
+        else
+        {
+            multiplier ++;
+
+            switch (multiplier)
+            {
+                case 2:
+                    Play_Motivational_Word(0);break;
+                case 4:
+                    Play_Motivational_Word(1); break;
+                case 6:
+                    Play_Motivational_Word(2); break;
+            }
+        }
+    }
+
+    void Play_Motivational_Word(int index)
+    {
+        _motivationalImg.sprite = _motivationalSprites[index];
+        mainCanvas.Play("inGameCanvas_Motivation");
+        Game_Over_2_AudioManager.audioManInstance.Play_Sfx("motivation_" + index.ToString());
     }
 
     public void DecScore()
     {
+        multiplier = 1;
         if (currentKingMood > 0)
         {
             currentKingMood--;
@@ -194,5 +228,6 @@ public class SpawnablePie : MonoBehaviour
 
         finalBestSCoreTxt.text = bestScore.ToString();
         mainCanvas.Play("Game_Over");
+        Game_Over_2_AudioManager.audioManInstance.ChangeMusicPitch();
     }
 }

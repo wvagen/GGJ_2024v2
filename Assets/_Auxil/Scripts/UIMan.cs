@@ -16,6 +16,12 @@ public class UIMan : MonoBehaviour
 
     bool isSPacePressed = false;
     // Update is called once per frame
+
+    private void Start()
+    {
+        Game_Over_2_AudioManager.audioManInstance.InitMusicPitch();
+    }
+
     void Update()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0 && !isSPacePressed
