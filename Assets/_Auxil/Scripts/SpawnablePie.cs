@@ -38,6 +38,11 @@ public class SpawnablePie : MonoBehaviour
     [SerializeField]
     private Image[] satisfLvlImgs;
 
+    [SerializeField]
+    private GameObject[] nonTutoPanel;
+    [SerializeField]
+    private GameObject tutoPanel;
+
     Image selectedImg;
 
     Vector3 currentNeedleRot = Vector3.zero;
@@ -49,11 +54,14 @@ public class SpawnablePie : MonoBehaviour
     short multiplier = 1;
     public static bool isGameOver = false;
 
+    bool isSpacePressed = false;
+
     private void Start()
     {
         nextSpawnTime = targetRate;
-        isGameOver = false;
+        isGameOver = true;
         SelectLevel(1);
+        TutoObjects(true);
     }
 
     void SelectLevel(int levelIndex)
@@ -86,6 +94,13 @@ public class SpawnablePie : MonoBehaviour
             Game_Over();
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && isGameOver && !isSpacePressed)
+        {
+            isSpacePressed = true;
+            isGameOver = false;
+            TutoObjects(false);
+        }
+
         //if (Input.GetKeyDown(KeyCode.G))
         //{
         //    currentKingMood--;
@@ -97,6 +112,15 @@ public class SpawnablePie : MonoBehaviour
         //    currentKingMood++;
         //    SelectLevel(currentKingMood);
         //}
+    }
+
+    void TutoObjects(bool isTuto)
+    {
+        tutoPanel.SetActive(isTuto);
+        for (int i = 0; i < nonTutoPanel.Length; i++)
+        {
+            nonTutoPanel[i].SetActive(!isTuto);
+        }
     }
 
     IEnumerator SpawnPies()
@@ -162,7 +186,7 @@ public class SpawnablePie : MonoBehaviour
         finalScoreTxt.text = score.ToString();
         isGameOver = true;
         int bestScore = PlayerPrefs.GetInt("best", score);
-        if (score > bestScore)
+        if (score >= bestScore)
         {
             bestScore = score;
             PlayerPrefs.SetInt("best", bestScore);
