@@ -81,5 +81,17 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: talking
+    clip: {fileID: 8300000, guid: eb32b47601350d941a359500413fabf2, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: king_laugh
+    clip: {fileID: 8300000, guid: 9e3a7ea1e6c38134b821774302a3ab5f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
   externalAudioSource: {fileID: 0}
   musicMoment: 0

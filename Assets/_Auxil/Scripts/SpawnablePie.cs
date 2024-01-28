@@ -68,6 +68,7 @@ public class SpawnablePie : MonoBehaviour
     {
         nextSpawnTime = targetRate;
         isGameOver = true;
+        Game_Over_2_AudioManager.audioManInstance.Play_Sfx("talking");
         SelectLevel(1);
         TutoObjects(true);
     }
@@ -161,6 +162,11 @@ public class SpawnablePie : MonoBehaviour
             currentKingMood++;
             StartCoroutine(RotateTowards(-30));
             SelectLevel(currentKingMood);
+
+            if (currentKingMood == 2)
+            {
+                Game_Over_2_AudioManager.audioManInstance.Play_Sfx("king_laugh");
+            }
         }
         else
         {
